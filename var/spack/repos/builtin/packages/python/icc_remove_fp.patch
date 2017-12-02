@@ -1,0 +1,24 @@
+diff -ur Python-2.7.14/configure Python-2.7.14.new/configure
+--- Python-2.7.14/configure	2017-09-17 02:38:35.000000000 +0900
++++ Python-2.7.14.new/configure	2017-12-02 19:55:10.171957320 +0900
+@@ -6221,7 +6221,7 @@
+ # ICC needs -fp-model strict or floats behave badly
+ case "$CC" in
+ *icc*)
+-    BASECFLAGS="$BASECFLAGS -fp-model strict"
++    #BASECFLAGS="$BASECFLAGS -fp-model strict"
+     ;;
+ esac
+ 
+diff -ur Python-2.7.14/configure.ac Python-2.7.14.new/configure.ac
+--- Python-2.7.14/configure.ac	2017-09-17 02:38:35.000000000 +0900
++++ Python-2.7.14.new/configure.ac	2017-12-02 19:54:58.144909540 +0900
+@@ -1271,7 +1271,7 @@
+ # ICC needs -fp-model strict or floats behave badly
+ case "$CC" in
+ *icc*)
+-    BASECFLAGS="$BASECFLAGS -fp-model strict"
++    #BASECFLAGS="$BASECFLAGS -fp-model strict"
+     ;;
+ esac
+ 

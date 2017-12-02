@@ -100,6 +100,8 @@ class Python(AutotoolsPackage):
     patch('cray-rpath-2.3.patch', when="@2.3:3.0.1 platform=cray")
     patch('cray-rpath-3.1.patch', when="@3.1:3.99  platform=cray")
 
+    patch('icc_remove_fp.patch')
+
     _DISTUTIL_VARS_TO_SAVE = ['LDSHARED']
     _DISTUTIL_CACHE_FILENAME = 'sysconfig.json'
     _distutil_vars = None
