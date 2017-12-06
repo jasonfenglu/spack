@@ -31,10 +31,23 @@ class PyAstropy(PythonPackage):
     Python astronomy packages."""
 
     homepage = 'http://www.astropy.org/'
-    url = 'https://pypi.io/packages/source/a/astropy/astropy-1.1.2.tar.gz'
+    url = 'https://github.com/astropy/astropy/archive/v2.0.2.tar.gz'
+    list_url = 'https://github.com/astropy/astropy/archive/'
 
-    version('1.1.2',     'cbe32023b5b1177d1e2498a0d00cda51')
-    version('1.1.post1', 'b52919f657a37d45cc45f5cb0f58c44d')
+    version('develop', git='https://github.com/astropy/astropy.git')
+    version('2.0.2',  '3c4027cd59166f2e4524de6c9f37a48a',
+            url='https://github.com/astropy/astropy/archive/v2.0.2.tar.gz')
+    version('2.0.1',  'e1da08e62ac8e4bf13b9b5241993cba5')
+    version('2.0rc1', '62ebc2a60be3db46f8b86e70c6d00db2')
+    version('2.0',    '2e979357fd0c103c3f811002519bdb23')
+    version('1.3.3',  'aeef4a2b375d9e649286f7f7167f9593')
+    version('1.3.2',  '1a8fa8fda4252c78f306bf78ee457e38')
+    version('1.3.1',  'cc5ed22c1fa71d132f0634efe150200a')
+
+    version('1.1.2',     'cbe32023b5b1177d1e2498a0d00cda51',
+            url='https://pypi.io/packages/source/a/astropy/astropy-1.1.2.tar.gz')
+    version('1.1.post1', 'b52919f657a37d45cc45f5cb0f58c44d',
+            url='https://pypi.io/packages/source/a/astropy/astropy-1.1.post1.tar.gz')
 
     # Required dependencies
     depends_on('py-setuptools', type='build')
