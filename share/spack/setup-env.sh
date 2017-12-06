@@ -237,10 +237,17 @@ fi;
 # Set up modules and dotkit search paths in the user environment
 #
 
-_python_command=$(printf  "%s\\\n%s\\\n%s" \
+# _python_command=$(printf  "%s\\\n%s\\\n%s" \
+# "print(\'_sp_sys_type={0}\'.format(spack.architecture.sys_type()))" \
+# "print(\'_sp_dotkit_root={0}\'.format(spack.util.path.canonicalize_path(spack.config.get_config(\'config\').get(\'module_roots\', {}).get(\'dotkit\'))))" \
+# "print(\'_sp_tcl_root={0}\'.format(spack.util.path.canonicalize_path(spack.config.get_config(\'config\').get(\'module_roots\', {}).get(\'tcl\'))))" 
+# )
+
+_python_command=$(printf  "%s\\\n%s\\\n%s\\\n%s" \
 "print(\'_sp_sys_type={0}\'.format(spack.architecture.sys_type()))" \
 "print(\'_sp_dotkit_root={0}\'.format(spack.util.path.canonicalize_path(spack.config.get_config(\'config\').get(\'module_roots\', {}).get(\'dotkit\'))))" \
-"print(\'_sp_tcl_root={0}\'.format(spack.util.path.canonicalize_path(spack.config.get_config(\'config\').get(\'module_roots\', {}).get(\'tcl\'))))"
+"print(\'_sp_tcl_root={0}\'.format(spack.util.path.canonicalize_path(spack.config.get_config(\'config\').get(\'module_roots\', {}).get(\'tcl\'))))" \
+"print(\'_sp_lmod_root={0}\'.format(spack.util.path.canonicalize_path(spack.config.get_config(\'config\').get(\'module_roots\', {}).get(\'lmod\'))))"
 )
 
 _assignment_command=$(spack-python -c "exec('${_python_command}')")
@@ -248,6 +255,7 @@ eval ${_assignment_command}
 
 _spack_pathadd DK_NODE    "${_sp_dotkit_root%/}/$_sp_sys_type"
 _spack_pathadd MODULEPATH "${_sp_tcl_root%/}/$_sp_sys_type"
+_spack_pathadd MODULEPATH "${_sp_lmod_root%/}/$_sp_sys_type/Core"
 
 # Add programmable tab completion for Bash
 #
