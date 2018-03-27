@@ -63,6 +63,12 @@ def _mxm_dir():
     else:
         return None
 
+def _pmi_dir():
+    path = "/work/packages/slurm_munge_spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/slurm-17-02-6-1-rseim3gytm52mmmt3mvtokniic6l332s"
+    if os.path.isdir(path):
+        return path
+    else:
+        return None
 
 class Openmpi(AutotoolsPackage):
     """An open source Message Passing Interface implementation.
@@ -182,7 +188,7 @@ class Openmpi(AutotoolsPackage):
         'fabrics',
         default=None if _verbs_dir() is None else 'verbs',
         description='List of fabrics that are enabled',
-        values=('psm', 'psm2', 'verbs', 'mxm'),
+        values=('psm', 'psm2', 'pmi', 'verbs', 'mxm', 'pmix'),
         multi=True
     )
 
@@ -232,6 +238,8 @@ class Openmpi(AutotoolsPackage):
     depends_on('ucx', when='+ucx')
     depends_on('zlib', when='@3.0.0:')
     depends_on('valgrind~mpi', when='+memchecker')
+
+    depends_on('pmix', when='fabrics=pmix')
 
     conflicts('+cuda', when='@:1.6')  # CUDA support was added in 1.7
     conflicts('fabrics=psm2', when='@:1.8')  # PSM2 support was added in 1.10.0
@@ -312,6 +320,16 @@ class Openmpi(AutotoolsPackage):
         path = _mxm_dir()
         if (path is not None):
             line += '={0}'.format(path)
+        return line
+
+    def with_or_without_pmix(self, activated):
+        spec = self.spec
+        opt = 'pmix'
+        if not activated:
+            return '--without-{0}'.format(opt)
+        line = '--with-{0}'.format(opt)
+        # line += '={0} '.format(spec['pmix'].prefix)
+        # line += '--with-libevent={0}'.format(spec['libevent'].prefix)
         return line
 
     @run_before('autoreconf')

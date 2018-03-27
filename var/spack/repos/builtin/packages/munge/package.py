@@ -37,6 +37,11 @@ class Munge(AutotoolsPackage):
     depends_on('openssl')
     depends_on('libgcrypt')
 
+    def configure_args(self):
+        spec = self.spec 
+        args = ['--localstatedir=/var']
+        return args
+
     def install(self, spec, prefix):
         os.makedirs(os.path.join(prefix, "lib/systemd/system"))
         super(Munge, self).install(spec, prefix)
