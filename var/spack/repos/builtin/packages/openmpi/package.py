@@ -228,6 +228,7 @@ class Openmpi(AutotoolsPackage):
     variant('cuda', default=False, description='Enable CUDA support')
     variant('pmi', default=False, description='Enable PMI support')
     variant('cxx_exceptions', default=True, description='Enable C++ Exception support')
+    variant('pmix', default=False, description='Enable PMIx support')
     # Adding support to build a debug version of OpenMPI that activates
     # Memchecker, as described here:
     #
@@ -336,6 +337,10 @@ class Openmpi(AutotoolsPackage):
             join_path(self.prefix.lib, 'libmpi.{0}'.format(dso_suffix))
         ]
 
+    def setup_environment(self, spack_env, run_env):
+        # run_env.prepend_path('LD_LIBRARY_PATH', "/opt/pmix/2.1.1")
+        return
+
     def with_or_without_verbs(self, activated):
         # Up through version 1.6, this option was previously named
         # --with-openib
@@ -410,13 +415,13 @@ class Openmpi(AutotoolsPackage):
         # adding --enable-static silently disables slurm support via pmi/pmi2
         # for versions older than 3.0.3,3.1.3,4.0.0
         # Presumably future versions after 11/2018 should support slurm+static
-        if spec.satisfies('schedulers=slurm'):
-            config_args.append('--with-pmi={0}'.format(spec['slurm'].prefix))
-            if spec.satisfies('@3.1.3:') or spec.satisfies('@3.0.3'):
-                config_args.append('--enable-static')
-        else:
-            config_args.append('--enable-static')
-            config_args.extend(self.with_or_without('pmi'))
+        # if spec.satisfies('schedulers=slurm'):
+        #     config_args.append('--with-pmi={0}'.format('/opt/pmix/2.1.1'))
+        #     if spec.satisfies('@3.1.3:') or spec.satisfies('@3.0.3'):
+        #         config_args.append('--enable-static')
+        # else:
+        #     config_args.append('--enable-static')
+        #     config_args.extend(self.with_or_without('pmi'))
 
         if spec.satisfies('@2.0:'):
             # for Open-MPI 2.0:, C++ bindings are disabled by default.
@@ -444,6 +449,13 @@ class Openmpi(AutotoolsPackage):
         # Schedulers
         if 'schedulers=auto' not in spec:
             config_args.extend(self.with_or_without('schedulers'))
+        config_args.extend(self.with_or_without('schedulers'))
+        # PMI
+        config_args.extend(self.with_or_without('pmi'))
+        # PMIx
+        config_args.extend(self.with_or_without('pmix'))
+        if spec.satisfies('+pmix'):
+            config_args.append('--with-libevent={0}'.format('/usr/lib64'))
 
         config_args.extend(self.enable_or_disable('memchecker'))
         if spec.satisfies('+memchecker', strict=True):
