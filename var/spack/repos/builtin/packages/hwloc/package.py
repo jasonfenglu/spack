@@ -77,6 +77,7 @@ class Hwloc(AutotoolsPackage):
             # library at build time that is then not found at run time
             # (Alternatively, we could require OpenCL as dependency.)
             "--disable-opencl",
+            "--disable-gl"
         ]
         if '@2.0.0:' in self.spec:
             args.append('--enable-netloc')

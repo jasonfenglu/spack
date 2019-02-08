@@ -15,8 +15,7 @@
 # -------------------------------------------------------------------------
 modules:
   enable:
-    - tcl
-    - dotkit
+    - lmod
   prefix_inspections:
     bin:
       - PATH
@@ -40,5 +39,17 @@ modules:
       - CMAKE_PREFIX_PATH
 
   lmod:
+    core_compilers:
+      - gcc@4.8.5
+    hash_length: 7
+    blacklist: 
+      - '%gcc'
+    whitelist:
+      - intel
+      - gcc
+      - tmux 
+      - llvm
+      - miniconda3
+      - miniconda2
     hierarchy:
       - mpi
