@@ -23,8 +23,13 @@ class Ffmpeg(AutotoolsPackage):
     variant('aom', default=False,
             description='build Alliance for Open Media libraries')
 
+    variant('ffplay', default=True,
+            description='build ffplay binary.')
+
     depends_on('yasm@1.2.0:')
     depends_on('aom', when='+aom')
+    depends_on('sdl2', when='+ffplay')
+    depends_on('libx264')
 
     def configure_args(self):
         spec = self.spec
@@ -37,5 +42,11 @@ class Ffmpeg(AutotoolsPackage):
             config_args.append('--enable-libaom')
         else:
             config_args.append('--disable-libaom')
+
+        # if '+ffplay' in spec:
+        #     config_args.append('--with-sdl')
+        config_args.append('--logfile=config.log')
+        config_args.append('--enable-libx264')
+        config_args.append('--enable-gpl')
 
         return config_args
