@@ -278,6 +278,7 @@ class Openmpi(AutotoolsPackage):
     depends_on('slurm', when='schedulers=slurm')
     depends_on('lsf', when='schedulers=lsf')
     depends_on('binutils+libiberty', when='fabrics=mxm')
+    depends_on('libevent', when='+pmix')
 
     conflicts('+cuda', when='@:1.6')  # CUDA support was added in 1.7
     conflicts('fabrics=psm2', when='@:1.8')  # PSM2 support was added in 1.10.0
@@ -455,7 +456,8 @@ class Openmpi(AutotoolsPackage):
         # PMIx
         config_args.extend(self.with_or_without('pmix'))
         if spec.satisfies('+pmix'):
-            config_args.append('--with-libevent={0}'.format('/usr/lib64'))
+            config_args.append('--with-libevent={0}'
+                               .format(spec['libevent'].prefix))
 
         config_args.extend(self.enable_or_disable('memchecker'))
         if spec.satisfies('+memchecker', strict=True):
