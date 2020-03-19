@@ -45,6 +45,7 @@ class Pgplot(Package):
     variant('latex', default=True, description='Add /LATEX driver.')
     variant('xwindows', default=True, description='Add /XWINDOWS driver.')
     variant('xserve', default=True, description='Add /xserve driver.')
+    variant('ps', default=True, description='Add all ps related drivers.')
 
     depends_on('libpng', when='+png')
     depends_on('zlib', when='+png')
@@ -66,28 +67,19 @@ class Pgplot(Package):
         run_env.set('PGPLOT_DIR', self.prefix)
         run_env.set('PGPLOT_FONT', self.prefix)
 
-    def select_driver(driver):
-        driver = driver.upper()
-        match = re.compile(r'(^!)(.+{}.+)'.format(driver))
-        for line in fileinput.input('drivers.list', inplace=True):
-            result = match.search(line)
-            if result:
-                line = ' '+result.groups()[1]
-            print(line.rstrip())
-
-
     def install(self, spec, prefix):
-
-        # Add png if needed
-        # match = re.compile(r'(^!)(.+PNG.+)')
-        # for line in fileinput.input('drivers.list', inplace=True):
-        #     result = match.search(line)
-        #     if result:
-        #         line = ' '+result.groups()[1]
-        #     print(line.rstrip())
+        def select_driver(driver):
+            driver = driver.upper()
+            match = re.compile(r'(^!)(.+/{}.+)'.format(driver))
+            for line in fileinput.input('drivers.list', inplace=True):
+                result = match.search(line)
+                if result:
+                    line = ' '+result.groups()[1]
+                print(line.rstrip())
 
         if ('+png' in spec):
             select_driver('png')
+            select_driver('tpng')
         if ('+iterm' in spec):
             select_driver('iterm')
         if ('+latex' in spec):
@@ -96,6 +88,9 @@ class Pgplot(Package):
             select_driver('xwindows')
         if ('+xserve' in spec):
             select_driver('xserve')
+        if ('+ps' in spec):
+            for d in ['ps', 'vps', 'cps', 'vcps' ]:
+                select_driver(d)
 
 
         source_path = self.stage.source_path
