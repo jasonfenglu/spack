@@ -1,0 +1,12 @@
+diff -Naur pgplot/sys_linux/f77_gcc.conf pgplot_old/sys_linux/f77_gcc.conf
+--- pgplot/sys_linux/f77_gcc.conf	2001-02-17 09:41:01.000000000 +0900
++++ pgplot_old/sys_linux/f77_gcc.conf	2019-10-08 18:26:13.980659430 +0900
+@@ -75,7 +75,7 @@
+ # The library-specification flags to use when linking normal pgplot
+ # demo programs.
+  
+-   LIBS="-lf2c -L/usr/X11R6/lib -lX11 \`\$(SRC)/cpg/libgcc_path.sh\` -lgcc -lm -lc"
++   LIBS="-L/usr/X11R6/lib -lX11 \`\$(SRC)/cpg/libgcc_path.sh\` -lgcc -lm -lc"
+ 
+ # Optional: Needed by XMDRIV (/xmotif).
+ # The library-specification flags to use when linking motif

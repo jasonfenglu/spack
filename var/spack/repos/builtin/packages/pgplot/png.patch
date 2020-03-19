@@ -1,0 +1,11 @@
+diff -Naur pgplot_old/makemake pgplot/makemake
+--- pgplot_old/makemake	2019-10-08 20:08:06.767393511 +0900
++++ pgplot/makemake	2019-10-08 20:08:12.305415265 +0900
+@@ -1025,7 +1025,6 @@
+ grivas.o : $(DRVDIR)/gadef.h
+ grtv00.o : $(DRVDIR)/imdef.h
+ pgxwin.o : $(DRVDIR)/pgxwin.h
+-pndriv.o : ./png.h ./pngconf.h ./zlib.h ./zconf.h
+ 
+ x2driv.o figdisp_comm.o: $(DRVDIR)/commands.h
+ 

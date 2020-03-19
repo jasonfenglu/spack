@@ -1,0 +1,23 @@
+diff -Naur pgplot_old/drivers.list pgplot/drivers.list
+--- pgplot_old/drivers.list	2019-10-08 18:46:21.646181000 +0900
++++ pgplot/drivers.list	2019-10-08 18:46:52.208292919 +0900
+@@ -32,7 +32,7 @@
+ ! LSDRIV 2 /VLIPS2    Canon LaserShot printer (portrait)
+ ! LNDRIV 0 /LN03      Dec LN03-PLUS Laser printer (landscape)           VMS
+ ! LVDRIV 0 /LVN03     Dec LN03-PLUS Laser printer (portrait)            VMS
+-! LXDRIV 0 /LATEX     LaTeX picture environment
++  LXDRIV 0 /LATEX     LaTeX picture environment
+ ! MFDRIV 0 /FILE      PGPLOT graphics metafile
+ ! NEDRIV 0 /NEXT      Computers running NeXTstep operating system
+   NUDRIV 0 /NULL      Null device (no output)				Std F77
+@@ -68,8 +68,8 @@
+ ! WDDRIV 2 /VWD       X Window dump file, portrait
+ ! WSDRIV 0 /WS        VAX workstations running VWS software		VMS
+ ! X2DRIV 0 /XDISP     PGDISP or FIGDISP server for X workstations	C
+-! XWDRIV 1 /XWINDOW   Workstations running X Window System		C
+-! XWDRIV 2 /XSERVE    Persistent window on X Window System		C
++  XWDRIV 1 /XWINDOW   Workstations running X Window System		C
++  XWDRIV 2 /XSERVE    Persistent window on X Window System		C
+ ! ZEDRIV 0 /ZETA      Zeta 8 Digital Plotter
+ !
+ ! The following drivers can only be used in PGPLOT installations on MS-DOS
