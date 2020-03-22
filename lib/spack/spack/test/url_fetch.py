@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -32,7 +32,7 @@ def pkg_factory():
     def factory(url, urls):
 
         def fn(v):
-            main_url = url or urls.pop(0)
+            main_url = url or urls[0]
             return spack.url.substitute_version(main_url, v)
 
         return Pkg(
@@ -75,7 +75,7 @@ def test_fetch(
         secure,
         checksum_type,
         config,
-        mutable_mock_packages
+        mutable_mock_repo
 ):
     """Fetch an archive and make sure we can checksum it."""
     mock_archive.url

@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -71,6 +71,7 @@ class Geant4(CMakePackage):
 
     depends_on('geant4-data@10.03.p03', when='@10.03.p03 ~data')
     depends_on('geant4-data@10.04', when='@10.04 ~data')
+    depends_on('geant4-data@10.05.p01', when='@10.05.p01 ~data')
 
     # As released, 10.03.03 has issues with respect to using external
     # CLHEP.

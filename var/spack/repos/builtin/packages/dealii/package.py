@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -179,6 +179,12 @@ class Dealii(CMakePackage, CudaPackage):
     patch('https://github.com/dealii/dealii/commit/f8de8c5c28c715717bf8a086e94f071e0fe9deab.patch',
           sha256='61f217744b70f352965be265d2f06e8c1276685e2944ca0a88b7297dd55755da',
           when='@9.0.1 ^boost@1.70.0:')
+
+    # Fix TBB version check
+    # https://github.com/dealii/dealii/pull/9208
+    patch('https://github.com/dealii/dealii/commit/80b13fe5a2eaefc77fa8c9266566fa8a2de91edf.patch',
+          sha256='6f876dc8eadafe2c4ec2a6673864fb451c6627ca80511b6e16f3c401946fdf33',
+          when='@9.0.0:9.1.1')
 
     # check that the combination of variants makes sense
     # 64-bit BLAS:

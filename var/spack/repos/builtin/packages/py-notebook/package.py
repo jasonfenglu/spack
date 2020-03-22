@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -25,7 +25,7 @@ class PyNotebook(PythonPackage):
 
     depends_on('python@2.7:2.8,3.3:', type=('build', 'run'))
     depends_on('python@3.5:', type=('build', 'run'), when='@6:')
-    depends_on('py-setuptools', type='build', when='@5:')
+    depends_on('py-setuptools', type=('build', 'run'), when='@5:')
     depends_on('py-jinja2', type=('build', 'run'))
     depends_on('py-tornado@4.0:6.999', type=('build', 'run'), when='@:5.7.4')
     depends_on('py-tornado@4.1:6.999', type=('build', 'run'), when='@5.7.5:6.0.1')

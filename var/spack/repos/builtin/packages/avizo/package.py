@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -31,8 +31,8 @@ class Avizo(Package):
     license_vars = ['MCSLMD_LICENSE_FILE']
 
     def setup_run_environment(self, env):
-        run_env.set('MCSLMD_LICENSE_FILE', join_path(self.prefix.share.license,
-                                                     'password.dat'))
+        env.set('MCSLMD_LICENSE_FILE', join_path(self.prefix.share.license,
+                                                 'password.dat'))
 
     def install(self, spec, prefix):
         ver = self.version.joined

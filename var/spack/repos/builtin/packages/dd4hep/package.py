@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -21,6 +21,10 @@ class Dd4hep(CMakePackage):
     version('master', branch='master')
     version('1.11.0', commit='280c7d748d56a704699408ac8e57815d029b169a')
     version('1.10.0', commit='9835d1813c07d9d5850d1e68276c0171d1726801')
+
+    # Workarounds for various TBB issues in DD4hep v1.11
+    # See https://github.com/AIDASoft/DD4hep/pull/613 .
+    patch('tbb-workarounds.patch', when='@1.11.0')
 
     variant('xercesc', default=False, description="Enable 'Detector Builders' based on XercesC")
     variant('geant4', default=False, description="Enable the simulation part based on Geant4")
