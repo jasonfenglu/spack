@@ -66,9 +66,9 @@ class Pgplot(Package):
         url = "ftp://ftp.astro.caltech.edu/pub/pgplot/pgplot{}.tar.gz"
         return url.format(version.joined)
 
-    def setup_environment(self, spack_env, run_env):
-        run_env.set('PGPLOT_DIR', self.prefix)
-        run_env.set('PGPLOT_FONT', self.prefix)
+    def setup_run_environment(self, env):
+        env.set('PGPLOT_DIR', self.prefix)
+        env.set('PGPLOT_FONT', self.prefix)
 
     def install(self, spec, prefix):
         def select_driver(driver):
