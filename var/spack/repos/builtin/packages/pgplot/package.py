@@ -50,6 +50,9 @@ class Pgplot(Package):
     depends_on('libpng', when='+png')
     depends_on('zlib', when='+png')
 
+    depends_on('libx11', when='+xwindows')
+    depends_on('libx11', when='+xserve')
+
     patch('remove_f2c.patch')
     patch('select_driver.patch')
     patch('png.patch')
